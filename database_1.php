@@ -33,7 +33,7 @@ function getQuote()
 // $andOr = AND | OR
 function getCustomers(array $where = array(), $andOr = 'AND')
 {
-    $query = 'SELECT `id`,`firstname`,`lastname` FROM `customers`';
+    $query = 'SELECT `id`,`firstname`,`lastname` FROM `users`';
     if ($where) {
         $query .= ' WHERE ';
         foreach ($where as $column => $value) {
