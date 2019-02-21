@@ -12,6 +12,7 @@ class dataStore
     protected $lastName;
     protected $age;
     protected $link;
+    protected $myArray;
 
     /**
      * @return mixed
@@ -63,9 +64,10 @@ class dataStore
     public function setAge($age)
     {
         $this->age = $age;
+        return $this;
     }
 
-
+s
 
     public function getConnection()
     {
@@ -73,10 +75,10 @@ class dataStore
             $this->link = NULL;
         }
 
-        if ($link === NULL) {
-            $link = mysqli_connect('localhost:3307', 'lightmvcuser', 'testpass', 'lightmvctestdb');
+        if ($this->link === NULL) {
+            $this->link = mysqli_connect('localhost:3307', 'lightmvcuser', '123456789', 'andrewdb');
         }
-        return $link;
+        return $this->link;
     }
 
     public function closeConnection()
@@ -100,20 +102,22 @@ class dataStore
 // $andOr = AND | OR
     public function getCustomers(array $where = array(), $andOr = 'AND')
     {
-        $this->$query = 'SELECT `id`,`firstname`,`lastname` FROM `users`';
+        $this->query = 'SELECT `id`,`firstname`,`lastname` FROM `users`';
         if ($where) {
-            $query .= ' WHERE ';
+            $this->query .= ' WHERE ';
             foreach ($where as $column => $value) {
-                $query .= $column . ' = ' . getQuote() . $value . getQuote() . ' ' . $andOr;
+                $this->query .= $column . ' = ' . getQuote() . $value . getQuote() . ' ' . $andOr;
             }
-            $query = substr($query, 0, -(strlen($andOr)));
+            $query = substr($this->query, 0, -(strlen($andOr)));
         }
-        $this->link = getConnection();
-        $thsi->result = mysqli_query($this->link, $this->query);
+        $this->link = $this->getConnection();
+
+        $this->result = mysqli_query($this->link, $this->query);
+
+        $this->closeConnection();
+
         return mysqli_fetch_all($this->result);
+
     }
 
-        $myArray = getCustomers();
-
-        closeConnection();
 }
