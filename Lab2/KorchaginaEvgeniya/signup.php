@@ -24,9 +24,10 @@ $htmlOut .= "\t<![endif]-->\n\n";
 $htmlOut .= "</head>\n\n";
 $htmlOut .= "<body>\n\n";
 $htmlOut .= "\t<div class=\"container\">\n";
-$htmlOut .= "\t\t<form class=\"form-signin\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
+$htmlOut .= "\t\t<form class=\"form-signin\" action=\"signup.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
 $htmlOut .= "\t\t\t<h2 class=\"form-signin-heading\" style=\"margin-bottom: 40px;\">" . "Please fill out the form" . "</h2>\n";
 $htmlOut .= "\t\t\t<div class=\"form-group\">\n";
+$htmlOut .= "\t\t\t<div id=\"input_container\">\n";
 $htmlOut .= "						<img src=\"images/icon_person.png\" id=\"input_img1\">";
 $htmlOut .= "\t\t\t\t<label for=\"inputUsername\" class=\"control-label\">Username:</label>\n";
 $htmlOut .= "\t\t\t\t<input class=\"form-control\" id=\"inputUsername\" name=\"name\" placeholder=\"Username\" type=\"text\" pattern=\"^[a-zA-Z]+$\" maxlength=\"40\" data-error=\"Invalid character.\" required autofocus>\n";
@@ -44,13 +45,26 @@ $htmlOut .= "\t\t\t\t<input class=\"form-control\" id=\"inputPassword\" name=\"r
 $htmlOut .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
 $htmlOut .= "\t\t\t</div>\n";
 $htmlOut .= "\t\t\t<div class=\"form-group\">\n";
-$htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" >Submit</button>\n";
+$htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" value=\"1\">Submit</button>\n";
 $htmlOut .= "\t\t\t</div>\n";
 $htmlOut .= "\t\t</form>\n";
+$htmlOut .= "\t\t<form class=\"form-back\" action=\"index.php\" method=\"post\" role=\"form\">\n";
+$htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" name=\"back\">Back</button>\n";
 $htmlOut .= "\t\t</form>\n";
-$htmlOut .= "\t\t<form class=\"form-signin\" action=\"index.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
-$htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" value=\"1\">Back</button>\n";
-$htmlOut .= "\t\t</form>\n";
+$htmlOut .= "\t</div> <!-- /container -->\n\n";
+
+if (isset($_POST['back']))
+{
+$htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
+$htmlOut .= "\t<script src=\"js/jquery.min.js\"></script>\n";
+$htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
+$htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
+$htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
+$htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n";
+$htmlOut .= "\t<!-- Form validator for Bootstrap 3 -->\n";
+$htmlOut .= "\t<script src=\"js/validator.min.js\"></script>\n\n";
+}
+
 $htmlOut .= "</body>\n\n";
 $htmlOut .= "</html>";
 
@@ -130,7 +144,7 @@ if (isset($_POST['submit'])) {
         mysqli_query($db, $query);
         $_SESSION['name'] = $name;
         $_SESSION['success'] = "You are now logged in";
-        header('location: index.php');
+//        header('location: index.php');
     }
     closeConnection();
 }

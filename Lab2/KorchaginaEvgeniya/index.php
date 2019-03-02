@@ -166,142 +166,6 @@ if ($postLoginForm === TRUE) {
             $userMessage = 'Invalid session <a href="index.php">Please login again</a>.';
             break;
     }
-//    $htmlOut =  "<!DOCTYPE html>\n";
-//    $htmlOut .= "<html lang=\"en\">\n";
-//    $htmlOut .= "<head>\n";
-//    $htmlOut .= "\t<meta charset=\"utf-8\">\n";
-//    $htmlOut .= "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
-//    $htmlOut .= "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n";
-//    $htmlOut .= "\t<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n\n";
-//    $htmlOut .= "\t<title>Login App</title>\n\n";
-//    $htmlOut .= "<link href=\"//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css\" rel=\"stylesheet\" id=\"bootstrap-css\">\n";
-//    $htmlOut .= "<script src=\"//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js\"></script>\n";
-//    $htmlOut .= "<script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n";
-//    $htmlOut .= "<!------ Include the above in your HEAD tag ---------->\n";
-//    $htmlOut .= "	<title>Login Page</title>\n";
-//    $htmlOut .= "   <!--Made with love by Mutiullah Samim -->\n";
-//    $htmlOut .= "   \n";
-//    $htmlOut .= "	<!--Bootsrap 4 CDN-->\n";
-//    $htmlOut .= "	<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n";
-//    $htmlOut .= "    \n";
-//    $htmlOut .= "    <!--Fontawesome CDN-->\n";
-//    $htmlOut .= "	<link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.3.1/css/all.css\" integrity=\"sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU\" crossorigin=\"anonymous\">\n";
-//    $htmlOut .= "\n";
-//    $htmlOut .= "	<!--Custom styles-->\n";
-//    $htmlOut .= "\t<link href=\"css/signin.css\" rel=\"stylesheet\">\n\n";
-//    $htmlOut .= "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
-//    $htmlOut .= "\t\t<script src=\"js/html5shiv.min.js\"></script>\n";
-//    $htmlOut .= "\t\t<script src=\"js/respond.min.js\"></script>\n";
-//    $htmlOut .= "</head>\n";
-//    $htmlOut .= "<body>\n";
-//
-//    if ($errorMessage === 0) {
-//
-//        $htmlOut .= "<div class=\"container\">\n";
-//        $htmlOut .= "	<div class=\"d-flex justify-content-center h-100\">\n";
-//        $htmlOut .= "		<div class=\"card\">\n";
-//        $htmlOut .= "			<div class=\"card-header\">\n";
-//        $htmlOut .= "\t\t\t<h3>" . $userMessage . "</h3>\n";
-//        $htmlOut .= "			</div>\n";
-//        $htmlOut .= "			<div class=\"card-body\">\n";
-//        $htmlOut .= "				<form action=\"index.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
-//        $htmlOut .= "					<div class=\"input-group form-group\">\n";
-//        $htmlOut .= "						<div class=\"input-group-prepend\">\n";
-//        $htmlOut .= "							<span class=\"input-group-text\"><i class=\"fas fa-user\"></i></span>\n";
-//        $htmlOut .= "						</div>\n";
-//        $htmlOut .= "						<input type=\"text\" placeholder=\"Username\" class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"username\">\n";
-//        $htmlOut .= "						\n";
-//        $htmlOut .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
-//        $htmlOut .= "					</div>\n";
-//        $htmlOut .= "					<div class=\"input-group form-group\">\n";
-//        $htmlOut .= "						<div class=\"input-group-prepend\">\n";
-//        $htmlOut .= "							<span class=\"input-group-text\"><i class=\"fas fa-key\"></i></span>\n";
-//        $htmlOut .= "						</div>\n";
-//        $htmlOut .= "						<input type=\"password\" id=\"inputPassword\" class=\"form-control\" name=\"password\" placeholder=\"password\">\n";
-//        $htmlOut .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
-//        $htmlOut .= "					</div>\n";
-//        $htmlOut .= "					<div class=\"form-group\">\n";
-//        $htmlOut .= "						<button type=\"submit\" class=\"btn float-right login_btn\" name=\"submit\" value=\"1\">Submit</button>\n";
-//        $htmlOut .= "					</div>\n";
-//        $htmlOut .= "				</form>\n";
-//        $htmlOut .= "			</div>\n";
-//        $htmlOut .= "		</div>\n";
-//        $htmlOut .= "	</div>\n";
-//        $htmlOut .= "</div>\n";
-//    } else {
-//        $htmlOut .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
-//        $htmlOut .= "\t\t<!-- Main jumbotron for a primary marketing message or call to action -->\n";
-//        $htmlOut .= "\t\t<div class=\"jumbotron\">\n";
-//        $htmlOut .= "\t\t\t<h2>" . $userMessage . "</h2>\n";
-//        $htmlOut .= "\t\t</div> <!-- /jumbotron -->\n";
-//        $htmlOut .= "\t</div> <!-- /container -->\n\n";
-//    }
-//
-//    $htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
-//    $htmlOut .= "\t<script src=\"js/jquery.min.js\"></script>\n";
-//    $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
-//    $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
-//    $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
-//    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n";
-//    $htmlOut .= "\t<!-- Form validator for Bootstrap 3 -->\n";
-//    $htmlOut .= "\t<script src=\"js/validator.min.js\"></script>\n\n";
-//    $htmlOut .= "</body>\n\n";
-//    $htmlOut .= "</html>";
-//
-//} else {
-//
-//    $htmlOut = "<!DOCTYPE html>\n\n";
-//    $htmlOut .= "<html lang=\"en\">\n\n";
-//    $htmlOut .= "<head>\n\n";
-//    $htmlOut .= "\t<meta charset=\"utf-8\">\n";
-//    $htmlOut .= "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
-//    $htmlOut .= "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n";
-//    $htmlOut .= "\t<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n\n";
-//    $htmlOut .= "\t<title>Login App</title>\n\n";
-//    $htmlOut .= "\t<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n";
-//    $htmlOut .= "\t<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n\n";
-//    $htmlOut .= "\t<!--[if lt IE 9]>\n";
-//    $htmlOut .= "\t\t<script src=\"js/html5shiv.min.js\"></script>\n";
-//    $htmlOut .= "\t\t<script src=\"js/respond.min.js\"></script>\n";
-//    $htmlOut .= "\t<![endif]-->\n\n";
-//    $htmlOut .= "\t<style media=\"screen\" type=\"text/css\">\n\n";
-//    $htmlOut .= "\t\t.container {\n";
-//    $htmlOut .= "\t\t\tmax-width: 480px;\n";
-//    $htmlOut .= "\t\t}\n\n";
-//    $htmlOut .= "\t</style>\n\n";
-//    $htmlOut .= "</head>\n\n";
-//    $htmlOut .= "<body>\n\n";
-//    $htmlOut .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
-//    $htmlOut .= "\t\t<!-- Main jumbotron for a primary marketing message or call to action -->\n";
-//    $htmlOut .= "\t\t<div class=\"jumbotron\">\n";
-//
-//    if (isset($_GET["check"])) {
-//
-//        $htmlOut .= "\t\t\t<h2>Hello, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are still logged in.<br /><br /><br /><br /></h2>\n";
-//
-//    } else {
-//
-//        $htmlOut .= "\t\t\t<h2>Welcome, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are logged in.</h2><br /><br /><p><a href=\"index.php?check=1\">Check cookie</a><br /><br /><br /><br /></p>\n";
-//    }
-//
-//    $htmlOut .= "\t\t\t<form action=\"index.php\" method=\"post\">\n";
-//    $htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"logout\" type=\"submit\" value=\"2\">Logout</button>\n";
-//    $htmlOut .= "\t\t\t</form>\n";
-//    $htmlOut .= "\t\t</div> <!-- /jumbotron -->\n";
-//    $htmlOut .= "\t</div> <!-- /container -->\n\n";
-//    $htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
-//    $htmlOut .= "\t<script src= \"js/jquery.min.js\"></script>\n";
-//    $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
-//    $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
-//    $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
-//    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";
-//    $htmlOut .= "</body>\n\n";
-//    $htmlOut .= "</html>";
-//
-//}
-//
-//// Render and then send the response to the client by flushing the buffer.
-//echo $htmlOut;
 
     $htmlOut = "<!DOCTYPE html>\n\n";
     $htmlOut .= "<html lang=\"en\">\n\n";
@@ -348,7 +212,7 @@ if ($postLoginForm === TRUE) {
         $htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" value=\"1\">Submit</button>\n";
         $htmlOut .= "\t\t\t</div>\n";
         $htmlOut .= "\t\t</form>\n";
-        $htmlOut .= "\t\t<form class=\"form-signin\" action=\"signup.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
+        $htmlOut .= "\t\t<form class=\"form-back\" action=\"signup.php\" method=\"post\" role=\"form\">\n";
         $htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"signup\" value=\"1\">Sign Up</button>\n";
         $htmlOut .= "\t\t</form>\n";
         $htmlOut .= "\t</div> <!-- /container -->\n\n";
@@ -364,16 +228,18 @@ if ($postLoginForm === TRUE) {
 
     }
 
-    $htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
-    $htmlOut .= "\t<script src=\"js/jquery.min.js\"></script>\n";
-    $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
-    $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
-    $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
-    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n";
-    $htmlOut .= "\t<!-- Form validator for Bootstrap 3 -->\n";
-    $htmlOut .= "\t<script src=\"js/validator.min.js\"></script>\n\n";
-    $htmlOut .= "</body>\n\n";
-    $htmlOut .= "</html>";
+    if (isset($_POST['signup'])) {
+        $htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
+        $htmlOut .= "\t<script src=\"js/jquery.min.js\"></script>\n";
+        $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
+        $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
+        $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
+        $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n";
+        $htmlOut .= "\t<!-- Form validator for Bootstrap 3 -->\n";
+        $htmlOut .= "\t<script src=\"js/validator.min.js\"></script>\n\n";
+        $htmlOut .= "</body>\n\n";
+        $htmlOut .= "</html>";
+    }
 
 } else {
 
