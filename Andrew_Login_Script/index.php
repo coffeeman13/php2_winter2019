@@ -247,7 +247,7 @@ if ($postLoginForm === TRUE) {
         $htmlOut .= "\t</div> <!-- /container -->\n\n";
 
     }
-	
+
     $htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
     $htmlOut .= "\t<script src=\"js/jquery.min.js\"></script>\n";
     $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
@@ -289,16 +289,16 @@ if ($postLoginForm === TRUE) {
     $htmlOut .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
     $htmlOut .= "\t\t<!-- Main jumbotron for a primary marketing message or call to action -->\n";
     $htmlOut .= "\t\t<div class=\"jumbotron\">\n";
-	
+
     if (isset($_GET["check"])) {
-	    
+
         $htmlOut .= "\t\t\t<h2>Hello, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are still logged in.<br /><br /><br /><br /></h2>\n";
-	    
+
     } else {
-	    
+
         $htmlOut .= "\t\t\t<h2>Welcome, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are logged in.</h2><br /><br /><p><a href=\"index.php?check=1\">Check cookie</a><br /><br /><br /><br /></p>\n";
     }
-	
+
     $htmlOut .= "\t\t\t<form action=\"index.php\" method=\"post\">\n";
     $htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"logout\" type=\"submit\" value=\"2\">Logout</button>\n";
     $htmlOut .= "\t\t\t</form>\n";
@@ -309,14 +309,14 @@ if ($postLoginForm === TRUE) {
     $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
     $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
     $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
-    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";    
+    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";
     $htmlOut .= "</body>\n\n";
     $htmlOut .= "</html>";
 
 }
 
 // Render and then send the response to the client by flushing the buffer.
-echo $htmlOut;
+//echo $htmlOut;
 
 ob_end_flush();
 
