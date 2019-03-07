@@ -10,11 +10,7 @@ class IndexController
     public function indexAction(){
 
         $dataStore = new dataStore();
-
-        $this->data['firstName'] = $dataStore -> getFirstName();
-        $this->data['lasrName'] = $dataStore -> getLastName();
-        $this->data['age'] = $dataStore -> getAge();
-
+        $this->data = $dataStore ->getusers();
         $this->viewManager = new TemplateManager();
         $this->viewManager-> setData($this->data);
         $this->viewManager->loadTemplate();

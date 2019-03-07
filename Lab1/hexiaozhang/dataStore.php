@@ -67,7 +67,7 @@ class dataStore
         return $this;
     }
 
-s
+
 
     public function getConnection()
     {
@@ -76,7 +76,7 @@ s
         }
 
         if ($this->link === NULL) {
-            $this->link = mysqli_connect('localhost:3307', 'lightmvcuser', '123456789', 'andrewdb');
+            $this->link = mysqli_connect('localhost:3307', 'root', '', 'andrewdb');
         }
         return $this->link;
     }
@@ -100,7 +100,7 @@ s
 // SELECT `id`,`firstname`,`lastname` FROM `customers` WHERE x=y
 // $where = [key = column name, value = data]
 // $andOr = AND | OR
-    public function getCustomers(array $where = array(), $andOr = 'AND')
+    public function getUsers(array $where = array(), $andOr = 'AND')
     {
         $this->query = 'SELECT `id`,`firstname`,`lastname` FROM `users`';
         if ($where) {
