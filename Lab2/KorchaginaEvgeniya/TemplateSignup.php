@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-ob_start();
-
 $htmlOut = "<!DOCTYPE html>\n\n";
 $htmlOut .= "<html lang=\"en\">\n\n";
 $htmlOut .= "<head>\n\n";
@@ -24,7 +21,7 @@ $htmlOut .= "\t<![endif]-->\n\n";
 $htmlOut .= "</head>\n\n";
 $htmlOut .= "<body>\n\n";
 $htmlOut .= "\t<div class=\"container\">\n";
-$htmlOut .= "\t\t<form class=\"form-signin\" action=\"signup.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
+$htmlOut .= "<form class=\"form-signin\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
 $htmlOut .= "\t\t\t<h2 class=\"form-signin-heading\" style=\"margin-bottom: 40px;\">" . "Please fill out the form" . "</h2>\n";
 $htmlOut .= "\t\t\t<div class=\"form-group\">\n";
 $htmlOut .= "\t\t\t<div id=\"input_container\">\n";
@@ -149,7 +146,3 @@ if (isset($_POST['submit'])) {
     closeConnection();
 }
 
-ob_end_flush();
-
-flush();
-exit;
