@@ -12,23 +12,24 @@ class TemplateManager
 
     protected $htmlTempleta;
     protected $data = [];
+    
     public function loadTemplate(){
          // Prepare view output.
         if ($data['postLoginForm'] === TRUE) {
             
-            switch ($errorMessage) {
+            switch ($data['errorMessage']) {
                 
                 case 0:
-                    $userMessage = 'Please sign in.';
+                    $data['userMessage'] = 'Please sign in.';
                     break;
                 case 1:
-                    $userMessage = 'Wrong credentials.  <a href="index.php">Try again</a>.';
+                    $data['userMessage'] = 'Wrong credentials.  <a href="index.php">Try again</a>.';
                     break;
                 case 2:
-                    $userMessage = 'You are logged out!  <a href="index.php">You can login again</a>.';
+                    $data['userMessage'] = 'You are logged out!  <a href="index.php">You can login again</a>.';
                     break;
                 case 3:
-                    $userMessage = 'Invalid session. <a href="index.php">Please login again</a>.';
+                    $data['userMessage'] = 'Invalid session. <a href="index.php">Please login again</a>.';
                     break;
             
                 }

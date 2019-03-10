@@ -17,22 +17,8 @@ class IndexController
     public function indexActions()
     {
        
-
-
         // Start output buffering.
         ob_start();
-
-        require_once dirname(__FILE__)
-            . DIRECTORY_SEPARATOR
-            . 'include'
-            . DIRECTORY_SEPARATOR
-            . 'julien_mysql_example.inc.php';
-
-        require_once dirname(__FILE__)
-            . DIRECTORY_SEPARATOR
-            . 'include'
-            . DIRECTORY_SEPARATOR
-            . 'julien_session_example.inc.php';
 
         // Set flags.
         $loginCheck = FALSE;
@@ -184,9 +170,9 @@ class IndexController
         }
 
 
-        $this->data['userMassage'] = $this->$userMessage;
-        $this->data['lastName'] = $this->$errorMessage;
-        $this->data['postLoginForm'] = $this->$postLoginForm;
+        $this->data['userMassage'] = $userMessage;
+        $this->data['errorMessage'] = $errorMessage;
+        $this->data['postLoginForm'] = $postLoginForm;
 
         $this->viewManager = new TemplateManager();
         $this->viewManager->setData($this->data);
