@@ -13,37 +13,148 @@ class TemplateManager
     protected $htmlTempleta;
     protected $data = [];
     public function loadTemplate(){
-        $this->htmlTempleta  = '<!DOCTYPE html>' ;
-        $this->htmlTempleta .= '<html lang="en">';
-        $this->htmlTempleta .= '<head>';
-        $this->htmlTempleta .= '<meta charset="UTF-8">';
-        $this->htmlTempleta .= '<title>Title</title>';
-        $this->htmlTempleta .= '<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">';
-        $this->htmlTempleta .= '<link rel="stylesheet" href="css/style.css">';
-        $this->htmlTempleta .= '<script type="javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>';
-        $this->htmlTempleta .= '</head>';
-        $this->htmlTempleta .= '<body>';
-        $this->htmlTempleta .= '<div class="wrapper">';
-        $this->htmlTempleta .= '<div class="container">';
-        $this->htmlTempleta .= '<form class="form-signin">';
-        $this->htmlTempleta .= '<p>Hello ' . $this->data['firstName']  . ' ' . $this->data['lastName'] . ' ' . $this->data['age']  . '</p>';
-        $this->htmlTempleta .= '<h1>Please sign in</h1>';
-        $this->htmlTempleta .= '<div class="form-label-group">';
-        $this->htmlTempleta .= '<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>';
-        $this->htmlTempleta .= '<label for="inputEmail">Email address</label>';
-        $this->htmlTempleta .= '</div>';
-        $this->htmlTempleta .= '<div class="form-label-group">';
-        $this->htmlTempleta .= '<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>';
-        $this->htmlTempleta .= '<label for="inputPassword">Password</label>';
-        $this->htmlTempleta .= '</div>';
-        $this->htmlTempleta .= '<div class="checkbox mb-3">';
-        $this->htmlTempleta .= '<label><input type="checkbox" value="remember-me"> Remember me</label>';
-        $this->htmlTempleta .= '</div>';
-        $this->htmlTempleta .= '<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>';
-        $this->htmlTempleta .= '<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>';
-        $this->htmlTempleta .= '</form></div></div></body></html>';
+         // Prepare view output.
+        if ($data['postLoginForm'] === TRUE) {
+            
+            switch ($errorMessage) {
+                
+                case 0:
+                    $userMessage = 'Please sign in.';
+                    break;
+                case 1:
+                    $userMessage = 'Wrong credentials.  <a href="index.php">Try again</a>.';
+                    break;
+                case 2:
+                    $userMessage = 'You are logged out!  <a href="index.php">You can login again</a>.';
+                    break;
+                case 3:
+                    $userMessage = 'Invalid session. <a href="index.php">Please login again</a>.';
+                    break;
+            
+                }
 
+        $this->htmlTempleta  = "<!DOCTYPE html>\n\n";
+        $this->htmlTempleta  .= "<html lang=\"en\">\n\n";
+        $this->htmlTempleta  .= "<head>\n\n";
+        $this->htmlTempleta  .= "\t<meta charset=\"utf-8\">\n";
+        $this->htmlTempleta  .= "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
+        $this->htmlTempleta  .= "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n";
+        $this->htmlTempleta  .= "\t<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n\n";
+        $this->htmlTempleta  .= "\t<title>Login App</title>\n\n";
+        $this->htmlTempleta  .= "\t<!-- Bootstrap -->\n";
+        $this->htmlTempleta  .= "\t<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n\n";
+        $this->htmlTempleta  .= "\t<!-- Custom styles for this template -->\n";
+        $this->htmlTempleta  .= "\t<link href=\"css/signin.css\" rel=\"stylesheet\">\n\n";
+        $this->htmlTempleta  .= "\t<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n";
+        $this->htmlTempleta  .= "\t<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n\n";
+        $this->htmlTempleta  .= "\t<!--[if lt IE 9]>\n";
+        $this->htmlTempleta  .= "\t\t<script src=\"js/html5shiv.min.js\"></script>\n";
+        $this->htmlTempleta  .= "\t\t<script src=\"js/respond.min.js\"></script>\n";
+        $this->htmlTempleta  .= "\t<![endif]-->\n\n";
+        $this->htmlTempleta  .= "</head>\n\n";
+        $this->htmlTempleta  .= "<body>\n\n";
 
+       
+        
+
+         if ($this->$data['errorMessage'] === 0) {
+
+                    $this->htmlTempleta .= "\t<div class=\"container\">\n";
+                    $this->htmlTempleta .= "\t\t<form class=\"form-signin\" action=\"index.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
+                    $this->htmlTempleta .= "\t\t\t<h2 class=\"form-signin-heading\">" . $this->$data['userMessage'] . "</h2>\n";
+                    $this->htmlTempleta .= "\t\t\t<div class=\"form-group\">\n";
+                    $this->htmlTempleta .= "\t\t\t\t<label for=\"inputUsername\" class=\"control-label\">Username:</label>\n";
+                    $this->htmlTempleta .= "\t\t\t\t<input class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"Username\" type=\"text\" pattern=\"^[a-zA-Z]+$\" maxlength=\"40\" data-error=\"Invalid character.\" required autofocus>\n";
+                    $this->htmlTempleta .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
+                    $this->htmlTempleta .= "\t\t\t</div>\n";
+                    $this->htmlTempleta .= "\t\t\t<div class=\"form-group\">\n";
+                    $this->htmlTempleta .= "\t\t\t\t<label for=\"inputPassword\" class=\"control-label\">Password:</label>\n";
+                    $this->htmlTempleta .= "\t\t\t\t<input class=\"form-control\" id=\"inputPassword\" name=\"password\" placeholder=\"Password\" type=\"password\" pattern=\"^[_a-zA-Z0-9]+$\" maxlength=\"40\" data-error=\"Invalid character.\" required>\n";
+                    $this->htmlTempleta .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
+                    $this->htmlTempleta .= "\t\t\t</div>\n";
+                    $this->htmlTempleta .= "\t\t\t<div class=\"form-group\">\n";
+                    $this->htmlTempleta .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" value=\"1\">Submit</button>\n";
+                    $this->htmlTempleta .= "\t\t\t</div>\n";
+                    $this->htmlTempleta .= "\t\t</form>\n";
+                    $this->htmlTempleta .= "\t</div> <!-- /container -->\n\n";
+
+                } else {
+
+                    $this->htmlTempleta .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
+                    $this->htmlTempleta .= "\t\t<!-- Main jumbotron for a primary marketing message or call to action -->\n";
+                    $this->htmlTempleta .= "\t\t<div class=\"jumbotron\">\n";
+                    $this->htmlTempleta .= "\t\t\t<h2>" . $this->$data['userMessage'] . "</h2>\n";
+                    $this->htmlTempleta .= "\t\t</div> <!-- /jumbotron -->\n";
+                    $this->htmlTempleta .= "\t</div> <!-- /container -->\n\n";
+
+                }
+                
+                $this->htmlTempleta .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
+                $this->htmlTempleta .= "\t<script src=\"js/jquery.min.js\"></script>\n";
+                $this->htmlTempleta .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
+                $this->htmlTempleta .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
+                $this->htmlTempleta .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
+                $this->htmlTempleta .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n";
+                $this->htmlTempleta .= "\t<!-- Form validator for Bootstrap 3 -->\n";
+                $this->htmlTempleta .= "\t<script src=\"js/validator.min.js\"></script>\n\n";
+                $this->htmlTempleta .= "</body>\n\n";
+                $this->htmlTempleta .= "</html>";
+
+            } else {
+
+                $this->htmlTempleta = "<!DOCTYPE html>\n\n";
+                $this->htmlTempleta .= "<html lang=\"en\">\n\n";
+                $this->htmlTempleta .= "<head>\n\n";
+                $this->htmlTempleta .= "\t<meta charset=\"utf-8\">\n";
+                $this->htmlTempleta .= "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
+                $this->htmlTempleta .= "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n";
+                $this->htmlTempleta .= "\t<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n\n";
+                $this->htmlTempleta .= "\t<title>Login App</title>\n\n";
+                $this->htmlTempleta .= "\t<!-- Bootstrap -->\n";
+                $this->htmlTempleta .= "\t<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n\n";
+                $this->htmlTempleta .= "\t<!-- Custom styles for this template -->\n";
+                $this->htmlTempleta .= "\t<link href=\"css/signin.css\" rel=\"stylesheet\">\n\n";
+                $this->htmlTempleta .= "\t<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n";
+                $this->htmlTempleta .= "\t<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n\n";
+                $this->htmlTempleta .= "\t<!--[if lt IE 9]>\n";
+                $this->htmlTempleta .= "\t\t<script src=\"js/html5shiv.min.js\"></script>\n";
+                $this->htmlTempleta .= "\t\t<script src=\"js/respond.min.js\"></script>\n";
+                $this->htmlTempleta .= "\t<![endif]-->\n\n";
+                $this->htmlTempleta .= "\t<style media=\"screen\" type=\"text/css\">\n\n";
+                $this->htmlTempleta .= "\t\t.container {\n";
+                $this->htmlTempleta .= "\t\t\tmax-width: 480px;\n";
+                $this->htmlTempleta .= "\t\t}\n\n";
+                $this->htmlTempleta .= "\t</style>\n\n";
+                $this->htmlTempleta .= "</head>\n\n";
+                $this->htmlTempleta .= "<body>\n\n";
+                $this->htmlTempleta .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
+                $this->htmlTempleta .= "\t\t<!-- Main jumbotron for a primary marketing message or call to action -->\n";
+                $this->htmlTempleta .= "\t\t<div class=\"jumbotron\">\n";
+                
+                if (isset($_GET["check"])) {
+                    
+                    $this->htmlTempleta .= "\t\t\t<h2>Hello, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are still logged in.<br /><br /><br /><br /></h2>\n";
+                    
+                } else {
+                    
+                    $this->htmlTempleta .= "\t\t\t<h2>Welcome, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are logged in.</h2><br /><br /><p><a href=\"index.php?check=1\">Check cookie</a><br /><br /><br /><br /></p>\n";
+                }
+                
+                $this->htmlTempleta .= "\t\t\t<form action=\"index.php\" method=\"post\">\n";
+                $this->htmlTempleta .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"logout\" type=\"submit\" value=\"2\">Logout</button>\n";
+                $this->htmlTempleta .= "\t\t\t</form>\n";
+                $this->htmlTempleta .= "\t\t</div> <!-- /jumbotron -->\n";
+                $this->htmlTempleta .= "\t</div> <!-- /container -->\n\n";
+                $this->htmlTempleta .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
+                $this->htmlTempleta .= "\t<script src= \"js/jquery.min.js\"></script>\n";
+                $this->htmlTempleta .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
+                $this->htmlTempleta .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
+                $this->htmlTempleta .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
+                $this->htmlTempleta .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";    
+                $this->htmlTempleta .= "</body>\n\n";
+                $this->htmlTempleta .= "</html>";
+
+            } 
 
     }
 
