@@ -1,5 +1,4 @@
 <?php
-
 // Start output buffering.
 ob_start();
 
@@ -7,13 +6,13 @@ require_once dirname(__FILE__)
     . DIRECTORY_SEPARATOR
     . 'include'
     . DIRECTORY_SEPARATOR
-    . 'database_connection.php';
+    . 'andrew_mysql_example.inc.php';
 
 require_once dirname(__FILE__)
     . DIRECTORY_SEPARATOR
     . 'include'
     . DIRECTORY_SEPARATOR
-    . 'session_manager.php';
+    . 'andrew_session_example.inc.php';
 
 // Set flags.
 $loginCheck = FALSE;
@@ -161,31 +160,30 @@ if ($loginCheck === TRUE && $validSession === FALSE && $errorMessage === 0) {
 
     $errorMessage = 3;
     $postLoginForm = TRUE;
-    ?>
 
-<?php if ($postLoginForm === TRUE): ?>
+}
 
-<?php
+// Prepare view output.
+if ($postLoginForm === TRUE) {
 
-//        switch ($errorMessage) {
-//
-//        case 0:
-//            $userMessage = 'Please sign in.';
-//            break;
-//        case 1:
-//            $userMessage = 'Wrong credentials.  <a href="index.php">Try again</a>.';
-//            break;
-//        case 2:
-//            $userMessage = 'You are logged out!  <a href="index.php">You can login again</a>.';
-//            break;
-//        case 3:
-//            $userMessage = 'Invalid session. <a href="index.php">Please login again</a>.';
-//            break;
-//
-//    }
+    switch ($errorMessage) {
 
-<?>
+        case 0:
+            $userMessage = 'Please sign in.';
+            break;
+        case 1:
+            $userMessage = 'Wrong credentials.  <a href="index.php">Try again</a>.';
+            break;
+        case 2:
+            $userMessage = 'You are logged out!  <a href="index.php">You can login again</a>.';
+            break;
+        case 3:
+            $userMessage = 'Invalid session. <a href="index.php">Please login again</a>.';
+            break;
 
+    }
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -216,15 +214,15 @@ if ($loginCheck === TRUE && $validSession === FALSE && $errorMessage === 0) {
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
 </head>
-<div class="text-center">
+<body class="text-center">
 
-    <?php if($errorMessage === 0): ?>
-
+<?php if ($userMessage == 0) : ?>
     <div class="container">
-        <form class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal"><?php echo $userMessage ?></h1>
+        <form class="form-signin" action="index.php" method="post">
+            <h2 class="form-signin-heading">" . $userMessage . "</h2>
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
             <div class="checkbox mb-3">
@@ -235,15 +233,20 @@ if ($loginCheck === TRUE && $validSession === FALSE && $errorMessage === 0) {
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
     </div>
-
-    <?php else: ?>
-    <div class="container theme-showcase role="main">
-        <div class="jumbotron">
-            <?php echo $userMessage ?>
-        </div>
-    </div>
-
-</div>
-<?php endif; ?>
+<?php else : ?>
+   <div class="container theme-showcase" role="main">
+       <div class="jumbotron">\n";
+            <h2><?php echo $userMessage ?></h2>
+       </div>
+   </div>
+<?php endif ?>
 </body>
 </html>
+
+<?php }
+ob_end_flush();
+
+flush();
+
+exit;
+?>

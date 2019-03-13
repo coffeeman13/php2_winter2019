@@ -17,7 +17,7 @@ function getConnection($getLink = TRUE)
     
     if ($link === NULL) {
         
-        $link = mysqli_connect('localhost:3307', 'loginuser', 'testpass', 'andrew_session_app');
+        $link = mysqli_connect('localhost:3307', 'loginuser', 'testpass', 'germil_login_app');
         
     } elseif ($getLink === FALSE) {
         
@@ -51,11 +51,11 @@ function queryResults($query)
     
 }
 
-// SELECT `username`, `password` FROM `users` WHERE `username` LIKE $username; 
-function checkLogin($username, $password)
+
+function checkLogin($email, $password)
 {
     
-    $query = 'SELECT `username`, `password` FROM `users` WHERE `username` LIKE ' . getQuote() . $username . getQuote();
+    $query = 'SELECT `email`, `password` FROM `users` WHERE `email` LIKE ' . getQuote() . $email . getQuote();
     
     $values = queryResults($query);
     
