@@ -1,0 +1,67 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.8
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Apr 04, 2018 at 10:04 PM
+-- Server version: 5.5.44-0+deb8u1
+-- PHP Version: 5.6.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `andrew_session_app`
+--
+CREATE DATABASE IF NOT EXISTS `andrew_session_app` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `andrew_session_app`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+`id` int(5) NOT NULL,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'Doug', '$2y$10$fuaRgmbICK4oQisc/Qj0IuzIxRWXqXBHtYPcoal15xKFJI39x5Kkm'),
+(2, 'Andrew', '$2y$10$AmR7Q/AJVQjZCAMafB/Rc.eXZaHv45vIC5A6IZ1VqrbKHmgzK.Rdq');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
