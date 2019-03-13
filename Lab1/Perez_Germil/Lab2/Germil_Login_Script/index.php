@@ -6,13 +6,13 @@ require_once dirname(__FILE__)
     . DIRECTORY_SEPARATOR
     . 'include'
     . DIRECTORY_SEPARATOR
-    . 'andrew_mysql_example.inc.php';
+    . 'database_connection.php';
 
 require_once dirname(__FILE__)
     . DIRECTORY_SEPARATOR
     . 'include'
     . DIRECTORY_SEPARATOR
-    . 'andrew_session_example.inc.php';
+    . 'session_manager.php';
 
 // Set flags.
 $loginCheck = FALSE;
@@ -58,7 +58,7 @@ if (isset($_COOKIE['loggedin'])) {
 // Login verification.
 if (isset($_POST['submit'])
     && $_POST['submit'] == 1
-    && !empty($_POST['username'])
+    && !empty($_POST['email'])
     && !empty($_POST['password'])) {
 
     if ($validSession === FALSE) {
@@ -67,21 +67,16 @@ if (isset($_POST['submit'])
 
     }
 
-    $username = (string) $_POST['username'];
+    $email = (string) $_POST['email'];
 
     $password = (string) $_POST['password'];
 
-    if (!ctype_alpha($username)) {
+    if (!ctype_alpha(email)) {
 
-        $username = preg_replace("/[^a-zA-Z]+/", "", $username);
-
-    }
-
-    if (strlen($username) > 40) {
-
-        $username = substr($username, 0, 39);
+        $username = preg_replace("/[^_a-zA-Z0-9@]+/", "", $email);
 
     }
+
 
     $password = preg_replace("/[^_a-zA-Z0-9]+/", "", $password);
 
@@ -92,7 +87,7 @@ if (isset($_POST['submit'])
     }
 
     // Check credentials.
-    if (checkLogin($username, $password)) {
+    if (checkLogin($email, $password)) {
 
         if ($validSession === TRUE) {
 
@@ -107,7 +102,7 @@ if (isset($_POST['submit'])
 
                 setcookie('loggedin', TRUE, time()+ 4200, '/');
                 $_SESSION['LOGGEDIN'] = TRUE;
-                $_SESSION['REMOTE_USER'] = $username;
+                $_SESSION['REMOTE_USER'] = $email;
                 $postLoginForm = FALSE;
 
             }
