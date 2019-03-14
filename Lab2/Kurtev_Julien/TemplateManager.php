@@ -12,10 +12,15 @@ class TemplateManager
 
     protected $htmlTempleta;
     protected $data = [];
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
     
     public function loadTemplate(){
          // Prepare view output.
-        if ($data['postLoginForm'] === TRUE) {
+        if ($this->data['postLoginForm'] === TRUE) {
             
             switch ($data['errorMessage']) {
                 

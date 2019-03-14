@@ -6,9 +6,13 @@
  * Time: 7:10 PM
  */
 
+require 'DataStore.php';
+require 'TemplateManager.php';
 require 'IndexController.php';
 
-$app = new IndexController();
+$dataStore = new DataStore();
+
+$app = new IndexController($dataStore);
 
 $app->indexActions();
 
