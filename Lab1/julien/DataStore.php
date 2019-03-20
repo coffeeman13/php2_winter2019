@@ -35,18 +35,15 @@ class DataStore
         }
     }
 
-
-
-
-    function getCustomers(array $where = array(), $andOr = 'AND')
+    function getCustomers(array $where = array())
     {
         $query = 'SELECT `age`,`first_name`,`last_name` FROM `customers`';
         if ($where) {
             $query .= ' WHERE ';
             foreach ($where as $column => $value) {
-                $query .= $column . ' = ' . "'" . $value . "'" . ' ' . $andOr;
+                $query .= $column . ' = ' . "'" . $value . "'";
             }
-            $query = substr($query, 0, -(strlen($andOr)));
+
         }
         $link = getConnection();
         $result = mysqli_query($link, $query);
