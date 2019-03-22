@@ -6,10 +6,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-DROP DATABASE IF EXISTS `andrew_session_app`;
+DROP DATABASE IF EXISTS `login`;
 
-CREATE DATABASE IF NOT EXISTS `andrew_session_app` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `andrew_session_app`;
+CREATE DATABASE IF NOT EXISTS `login` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `login`;
 
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(5) NOT NULL,
@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'Doug', '$2y$10$Fo4bJd7cGn8moBj8V4Kjme2KnQGPwn7nfFLJF8/rmF0l/8kDcjGyW'),
-(2, 'Andrew', '$2y$10$Fo4bJd7cGn8moBj8V4Kjme2KnQGPwn7nfFLJF8/rmF0l/8kDcjGyW');
+(1, 'Doug', '$2y$10$z552bOxa9F22LVmJd2iA.OF3CzHCSSNHArP.QgwkkbbHWqKZvru8y'),
+(2, 'Andrew', '$2y$10$z552bOxa9F22LVmJd2iA.OF3CzHCSSNHArP.QgwkkbbHWqKZvru8y');
 
 
 ALTER TABLE `users`

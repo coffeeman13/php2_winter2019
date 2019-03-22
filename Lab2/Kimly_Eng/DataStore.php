@@ -3,7 +3,7 @@
 class DataStore
 {
 
-    function getConnection($getLink = TRUE)
+    public function getConnection($getLink = TRUE)
     {
         static $link = NULL;
 
@@ -21,14 +21,14 @@ class DataStore
     }
 
 
-    function getQuote()
+    public function getQuote()
     {
 
         return "'";
     }
 
 
-    function queryResults($query)
+    public function queryResults($query)
     {
 
         $link = $this->getConnection();
@@ -39,7 +39,7 @@ class DataStore
     }
 
 
-    function checkLogin($username, $password)
+    public function checkLogin($username, $password)
     {
 
         $query = 'SELECT `username`, `password` FROM `users` WHERE `username` LIKE ' . $this->getQuote() . $username . $this->getQuote();
