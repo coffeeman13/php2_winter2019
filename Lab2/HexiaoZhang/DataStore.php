@@ -102,7 +102,7 @@ class dataStore
 // $andOr = AND | OR
     public function getUsers(array $where = array(), $andOr = 'AND')
     {
-        $this->query = 'SELECT `id`,`firstname`,`lastname` FROM `users`';
+        $this->query = 'SELECT `id`,`username`,`password` FROM `users`';
         if ($where) {
             $this->query .= ' WHERE ';
             foreach ($where as $column => $value) {
