@@ -1,19 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: z_kurtev
- * Date: 2019-02-06
- * Time: 7:10 PM
- */
 
-require 'DataStore.php';
+// Start output buffering.
+ob_start();
+
+// need autoloading
+require 'DataStorage.php';
 require 'TemplateManager.php';
 require 'IndexController.php';
 
-$dataStore = new DataStore();
+// need routing
 
-$app = new IndexController($dataStore);
+$app = new IndexController();
 
-$app->indexActions();
+$app->indexAction();
 
-
+ob_end_flush();

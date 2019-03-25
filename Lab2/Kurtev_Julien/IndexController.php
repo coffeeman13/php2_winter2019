@@ -1,67 +1,59 @@
- <?php
-/**
- * Created by PhpStorm.
- * User: z_kurtev
- * Date: 2019-02-06
- * Time: 7:47 PM
- */
+<?php
 
 class IndexController
 {
-    protected $dataStore;
+
     protected $data = [];
-    protected $viewManager;
 
-    public function __construct(DataStore $dataStore)
+    protected $dataStorage;
+
+    protected $templateManager;
+
+    // Set flags.
+    protected $loginCheck = FALSE;
+
+    protected $validSession = FALSE;
+
+    protected $postLoginForm = TRUE;
+
+// Initialize application business and frontend messages.
+    protected $errorMessage = 0;
+
+    protected $userMessage = '';
+
+    public function indexAction()
     {
-        $this->dataStore = $dataStore;
-    }
+        $this->dataStorage = new DataStorage();
 
-    public function indexActions()
-    {
-       
-        // Start output buffering.
-        ob_start();
-
-        // Set flags.
-        $loginCheck = FALSE;
-
-        $validSession = FALSE;
-
-        $postLoginForm = TRUE;
-
-        // Initialize application business and frontend messages.
-        $errorMessage = 0;
-
-        $userMessage = '';
+        $this->templateManager = new TemplateManager();
 
         // Check if user is already logged in.
         if (isset($_COOKIE['loggedin'])) {
-                
-            if ($validSession === FALSE) {
-            
-                $validSession = session_secure_init();
-            
+
+            if ($this->validSession === FALSE) {
+
+                $this->validSession = $this->session_secure_init();
+
             }
-            
+
             //  Check for cookie tampering.
-            if ($validSession === TRUE && isset($_SESSION['LOGGEDIN'])) {
-            
-                $postLoginForm = FALSE;
-            
+            if ($this->validSession === TRUE && isset($_SESSION['LOGGEDIN'])) {
+
+                $this->postLoginForm = FALSE;
+
             } else {
-                 
-                $validSession = session_obliterate();
-                 
-                $errorMessage = 3;
-                 
-                $postLoginForm = TRUE;
-                 
+
+                $this->validSession = $this->session_obliterate();
+
+                $this->errorMessage = 3;
+
+                $this->postLoginForm = TRUE;
+
             }
-            
+
             // Cookie login check done.
-            $loginCheck = TRUE;
-            
+            $this->loginCheck = TRUE;
+
         }
 
         // Login verification.
@@ -69,124 +61,243 @@ class IndexController
             && $_POST['submit'] == 1
             && !empty($_POST['username'])
             && !empty($_POST['password'])) {
-            
-            if ($validSession === FALSE) {
-            
-                $validSession = session_secure_init();
-            
+
+            if ($this->validSession === FALSE) {
+
+                $this->validSession = $this->session_secure_init();
+
             }
-            
+
             $username = (string) $_POST['username'];
-            
+
             $password = (string) $_POST['password'];
-            
+
             if (!ctype_alpha($username)) {
-            
+
                 $username = preg_replace("/[^a-zA-Z]+/", "", $username);
-            
+
             }
-            
+
             if (strlen($username) > 40) {
-                
+
                 $username = substr($username, 0, 39);
-                
+
             }
-            
+
             $password = preg_replace("/[^_a-zA-Z0-9]+/", "", $password);
-            
+
             if (strlen($password) > 40) {
-            
+
                 $password = substr($password, 0, 39);
-            
+
             }
 
             // Check credentials.
-            if ($this->dataStore->checkLogin($username, $password)) {
-                
-                if ($validSession === TRUE) {
-                    
+            if ($this->dataStorage->checkLogin($username, $password)) {
+
+                if ($this->validSession === TRUE) {
+
                     //  Check for cookie tampering.
                     if (isset($_SESSION['LOGGEDIN'])) {
-                        
-                        $validSession = session_obliterate();
-                        $errorMessage = 3;
-                        $postLoginForm = TRUE;
-                    
+
+                        $this->validSession = $this->session_obliterate();
+                        $this->errorMessage = 3;
+                        $this->postLoginForm = TRUE;
+
                     } else {
-                
+
                         setcookie('loggedin', TRUE, time()+ 4200, '/');
                         $_SESSION['LOGGEDIN'] = TRUE;
                         $_SESSION['REMOTE_USER'] = $username;
-                        $postLoginForm = FALSE;
-                    
+                        $this->postLoginForm = FALSE;
+
                     }
-                
+
                 } else {
-                    
-                    $validSession = session_obliterate();
-                    $errorMessage = 3;
-                    $postLoginForm = TRUE;
-                    
+
+                    $this->validSession = $this->session_obliterate();
+                    $this->errorMessage = 3;
+                    $this->postLoginForm = TRUE;
+
                 }
-                
+
             } else {
-                
-                $validSession = session_obliterate();
-                $errorMessage = 1;
-                $postLoginForm = TRUE;
-                
+
+                $this->validSession = $this->session_obliterate();
+                $this->errorMessage = 1;
+                $this->postLoginForm = TRUE;
+
             }
-            
+
             // Username-password login check done.
-            $loginCheck = TRUE;
-            
+            $this->loginCheck = TRUE;
+
         }
 
         // Intercept logout POST.
         if (isset($_POST['logout'])) {
-                    
-            if ($validSession === FALSE) {
-                
-                session_secure_init();
-                
+
+            if ($this->validSession === FALSE) {
+
+                $this->session_secure_init();
+
             }
-            
-            $validSession = session_obliterate();
-            $errorMessage = 2;
-            $postLoginForm = TRUE;
+
+            $this->validSession = $this->session_obliterate();
+            $this->errorMessage = 2;
+            $this->postLoginForm = TRUE;
 
         }
 
         // Intercept invalid sessions and redirect to login page.
-        if ($loginCheck === TRUE && $validSession === FALSE && $errorMessage === 0) {
-            
-            if ($validSession === FALSE) {
-            
-                $validSession = session_secure_init();
-                $validSession = session_obliterate();
-            
+        if ($this->loginCheck === TRUE && $this->validSession === FALSE && $this->errorMessage === 0) {
+
+            if ($this->validSession === FALSE) {
+
+                $this->validSession = $this->session_secure_init();
+                $this->validSession = $this->session_obliterate();
+
             }
-            
-            $errorMessage = 3;
-            $postLoginForm = TRUE;
-            
+
+            $this->errorMessage = 3;
+            $this->postLoginForm = TRUE;
+
         }
 
-        $this->data['userMassage'] = $userMessage;
-        $this->data['errorMessage'] = $errorMessage;
-        $this->data['postLoginForm'] = $postLoginForm;
+        // Prepare view output.
+        if ($this->postLoginForm === TRUE) {
 
-        $this->viewManager = new TemplateManager($this->data);
-        $this->viewManager->loadTemplate();
-        $this->viewManager->render();
+            switch ($this->errorMessage) {
+                case 0:
+                    $this->userMessage = 'Please sign in.';
+                    break;
+                case 1:
+                    $this->userMessage = 'Wrong credentials.  <a href="index.php">Try again</a>.';
+                    break;
+                case 2:
+                    $this->userMessage = 'You are logged out!  <a href="index.php">You can login again</a>.';
+                    break;
+                case 3:
+                    $this->userMessage = 'Invalid session. <a href="index.php">Please login again</a>.';
+                    break;
+            }
 
-        ob_end_flush();
+            $this->templateManager->setUserMessage($this->userMessage)->loadFormTemplate();
+        } else {
+            $this->templateManager->loadTemplate();
+        }
 
-        flush();
+        $this->templateManager->render();
 
-        exit;
-    
+    }
 
-} 
+    protected function session_obliterate()
+    {
+
+        $_SESSION = array();
+        setcookie(session_name(),'', time() - 3600, '/');
+        setcookie('loggedin', '', time() - 3600, '/');
+        session_destroy();   // Destroy session data in storage.
+        session_unset();     // Unset $_SESSION variable for the runtime.
+        $this->validSession = FALSE;
+        return $this->validSession;
+
+    }
+
+    protected function session_secure_init()
+    {
+        session_set_cookie_params(4200);
+
+        $this->validSession = TRUE;
+
+        if (!defined('OURUNIQUEKEY')) {
+
+            define('OURUNIQUEKEY', 'phpi');
+
+        }
+
+        // Avoid session prediction.
+        $sessionname = OURUNIQUEKEY;
+
+        if (session_name() != $sessionname) {
+
+            session_name($sessionname);
+
+        } else {
+
+            session_name();
+
+        }
+
+        // Start session.
+        session_start();
+
+        if ((!isset($_COOKIE['loggedin']) && isset($_SESSION['LOGGEDIN']))
+            ^ (isset($_COOKIE['loggedin']) && !isset($_SESSION['LOGGEDIN']))) {
+
+            $this->validSession = FALSE;
+
+        }
+
+        if ($this->validSession == TRUE) {
+
+            // Avoid session fixation.
+            if (!isset($_SESSION['INITIATED'])) {
+
+                session_regenerate_id();
+                $_SESSION['INITIATED'] = TRUE;
+
+            }
+
+            if (!isset($_SESSION['CREATED'])) {
+
+                $_SESSION['CREATED'] = time();
+
+            }
+
+            if (time() - $_SESSION['CREATED'] > 3600) {
+
+                // Session started more than 60 minutes ago.
+                session_regenerate_id();    // Change session ID for the current session an invalidate old session ID.
+                $_SESSION['CREATED'] = time();  // Update creation time.
+
+            }
+
+            // Avoid session hijacking.
+            $useragent = $_SERVER['HTTP_USER_AGENT'];
+
+            $useragent .= OURUNIQUEKEY;
+
+            if (isset($_SESSION['HTTP_USER_AGENT'])) {
+
+                if ($_SESSION['HTTP_USER_AGENT'] != md5($useragent)) {
+
+                    $this->validSession = FALSE;
+
+                }
+
+            } else {
+
+                $_SESSION['HTTP_USER_AGENT'] = md5($useragent);
+
+            }
+
+            // Avoid session fixation in case of an inactive session.
+            if ($this->validSession == TRUE && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > 3600) {
+
+                // Last request was more than 60 minutes ago.
+                $this->validSession = FALSE;
+
+            } else {
+
+                $_SESSION['LAST_ACTIVITY'] = time(); // Update last activity timestamp.
+
+            }
+
+        }
+
+        return $this->validSession;
+
+    }
 
 }

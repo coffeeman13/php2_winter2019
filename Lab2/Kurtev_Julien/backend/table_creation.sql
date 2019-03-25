@@ -6,8 +6,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-CREATE DATABASE IF NOT EXISTS `andrew_session_app` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `julien_session_app`;
+CREATE DATABASE IF NOT EXISTS `login_app` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `login_app`;
 
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(5) NOT NULL,
