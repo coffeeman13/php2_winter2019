@@ -1,0 +1,15 @@
+{
+	"name" : "lab3/perezgermil",
+	"authors" : [{
+			"name" : "Germil Perez",
+			"email" : "germil02132@hotmail.com"
+		}
+	],
+	"autoload" : {
+		"classmap" : [
+			"controllers",
+			"data",
+			"templates"
+		]
+	}
+}
